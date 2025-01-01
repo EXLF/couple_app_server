@@ -1,0 +1,87 @@
+### 测试环境变量
+@baseUrl = http://localhost:5000/api
+@authToken = YOUR_AUTH_TOKEN_HERE
+
+### 1. 用户注册
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+    "username": "testuser1",
+    "email": "test1@example.com",
+    "password": "password123"
+}
+
+### 2. 用户登录
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+    "username": "testuser1",
+    "password": "password123"
+}
+
+### 3. 添加纪念日
+POST {{baseUrl}}/anniversaries
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "title": "第一次见面",
+    "date": "2023-12-31",
+    "description": "在咖啡馆相遇"
+}
+
+### 4. 获取纪念日列表
+GET {{baseUrl}}/anniversaries
+Authorization: Bearer {{authToken}}
+
+### 5. 添加矛盾记录
+POST {{baseUrl}}/conflicts
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "title": "关于周末安排的分歧",
+    "description": "对于周末是出游还是在家休息产生分歧",
+    "date": "2023-12-31"
+}
+
+### 6. 更新矛盾状态
+PATCH {{baseUrl}}/conflicts/CONFLICT_ID/status
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "status": "已解决",
+    "resolution": "达成共识，这周末出游，下周末在家"
+}
+
+### 7. 添加今日健康记录
+POST {{baseUrl}}/health
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "hasTakenMedicine": true,
+    "note": "今天按时服药"
+}
+
+### 8. 获取伴侣今日健康记录
+GET {{baseUrl}}/health/partner/today
+Authorization: Bearer {{authToken}}
+
+### 9. 添加愿望
+POST {{baseUrl}}/wishes
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "title": "一起去旅行",
+    "description": "计划去日本旅行一周",
+    "targetDate": "2024-05-01"
+}
+
+### 10. 获取愿望统计
+GET {{baseUrl}}/wishes/stats
+Authorization: Bearer {{authToken}}
